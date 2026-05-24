@@ -31,7 +31,8 @@ Use this page when you are ready to upload the extensions to the stores.
 
 - Screenshots from `docs/screenshots/`
 - Extension icons from `packaging/browser-extension/icons/`
-- Public privacy policy URL: `https://raw.githubusercontent.com/Ps2/ai-prompt-firewall/main/docs/privacy.html` once the repository is public, or your hosted equivalent
+ - Public privacy policy URL (raw): `https://raw.githubusercontent.com/prithvi522/Firewall/main/docs/privacy.html`
+ - Public privacy policy URL (GitHub Pages after deploy): `https://prithvi522.github.io/Firewall/privacy.html`
 - Support/contact email
 
 ## Final Checks

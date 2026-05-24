@@ -101,7 +101,19 @@ async function ensureDependencies(python) {
 
   if (!fs.existsSync(venvDir)) {
     console.log('Creating backend virtual environment...');
-    await runProcess(python.command, [...python.args, '-m', 'venv', venvDir], { cwd: backendDir });
+    try {
+      await runProcess(python.command, [...python.args, '-m', 'venv', venvDir], { cwd: backendDir });
+    } catch (err) {
+      console.warn('python -m venv failed, attempting virtualenv fallback:', err && err.message);
+      try {
+        // try python -m virtualenv
+        await runProcess(python.command, [...python.args, '-m', 'virtualenv', venvDir], { cwd: backendDir });
+      } catch (err2) {
+        console.warn('virtualenv fallback failed:', err2 && err2.message);
+        // As a last resort, skip venv creation and rely on system python with user installs
+        console.warn('Falling back to system Python user-site installation (no venv).');
+      }
+    }
   }
 
   const venvPython = venvPythonPath();
@@ -110,8 +122,21 @@ async function ensureDependencies(python) {
   }
 
   console.log('Installing backend dependencies...');
-  await runProcess(venvPython, ['-m', 'pip', 'install', '--upgrade', 'pip'], { cwd: backendDir });
-  await runProcess(venvPython, ['-m', 'pip', 'install', '-r', requirementsPath], { cwd: backendDir });
+  try {
+    await runProcess(venvPython, ['-m', 'pip', 'install', '--upgrade', 'pip'], { cwd: backendDir });
+    await runProcess(venvPython, ['-m', 'pip', 'install', '-r', requirementsPath], { cwd: backendDir });
+  } catch (installErr) {
+    console.warn('Failed to install into venv, attempting user-site pip install as fallback:', installErr && installErr.message);
+    // fallback to system python with --user installs
+    try {
+      await runProcess(python.command, [...python.args, '-m', 'pip', 'install', '--user', '-r', requirementsPath], { cwd: backendDir });
+      // use system python as the runtime
+      return python.command;
+    } catch (sysErr) {
+      console.error('Fallback user-site pip install failed:', sysErr && sysErr.message);
+      throw installErr;
+    }
+  }
   writeStamp();
   return venvPython;
 }
