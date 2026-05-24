@@ -1,0 +1,13 @@
+{
+  "name": "ai-prompt-firewall",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "frontend": "npm --prefix frontend run dev",
+    "backend": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"cd backend; .\\run-backend.bat\"",
+    "dev": "npm run backend & npm run frontend",
+    "build:frontend": "npm --prefix frontend run build",
+    "package:browser-extension": "powershell -NoProfile -ExecutionPolicy Bypass -File packaging/browser-extension/package_extension.ps1",
+    "package:vscode-extension": "npm --prefix packaging/vscode-extension run package"
+  }
+}

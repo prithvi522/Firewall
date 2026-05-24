@@ -1,0 +1,68 @@
+{
+  "name": "ai-prompt-firewall-vscode",
+  "displayName": "AI Prompt Firewall",
+  "publisher": "Ps2",
+  "version": "0.1.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ps2/ai-prompt-firewall.git"
+  },
+  "description": "Scan the active editor, selected text, or pasted content for prompt injection signals with automatic local backend startup.",
+  "engines": {
+    "vscode": "^1.70.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "prompt-injection",
+    "security",
+    "scanner",
+    "firewall"
+  ],
+  "activationEvents": [
+    "onCommand:ai-prompt-firewall.openScanner",
+    "onCommand:ai-prompt-firewall.scanFile"
+  ],
+  "main": "extension.js",
+  "files": [
+    "backend_launcher.js",
+    "extension.js",
+    "scanner_fallback.js",
+    "package.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "package": "vsce package",
+    "vscode:prepublish": "node -e \"console.log('prepublish complete')\""
+  },
+  "devDependencies": {
+    "@vscode/vsce": "^3.6.2",
+    "axios": "^1.7.9",
+    "form-data": "^4.0.2"
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "ai-prompt-firewall.openScanner",
+        "title": "AI Prompt Firewall: Open Scanner"
+      },
+      {
+        "command": "ai-prompt-firewall.scanFile",
+        "title": "AI Prompt Firewall: Scan Active File"
+      }
+    ],
+    "configuration": {
+      "title": "AI Prompt Firewall",
+      "properties": {
+        "aiPromptFirewall.backendUrl": {
+          "type": "string",
+          "default": "http://127.0.0.1:5000/api/scan/upload",
+          "description": "Backend endpoint used by the VS Code extension."
+        }
+      }
+    }
+  }
+}

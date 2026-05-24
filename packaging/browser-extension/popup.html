@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>AI Prompt Firewall</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #07111f;
+        --panel: #0f1a2e;
+        --text: #e8f1ff;
+        --muted: #91a6c0;
+        --line: rgba(145, 166, 192, 0.2);
+        --accent: #56d7ff;
+        --accent-strong: #89e5ff;
+      }
+      body {
+        margin: 0;
+        width: 360px;
+        background: radial-gradient(circle at top left, rgba(86, 215, 255, 0.14), transparent 38%), var(--bg);
+        color: var(--text);
+        font-family: Inter, Segoe UI, sans-serif;
+      }
+      .shell { padding: 14px; }
+      .card {
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: linear-gradient(180deg, rgba(19, 34, 56, 0.96), rgba(15, 26, 46, 0.98));
+        padding: 14px;
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.24);
+      }
+      h1 { margin: 0; font-size: 20px; }
+      p { margin: 8px 0 0; font-size: 12px; line-height: 1.5; color: var(--muted); }
+      label {
+        display: block;
+        margin: 12px 0 6px;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+        font-weight: 700;
+      }
+      input, select, textarea {
+        width: 100%;
+        box-sizing: border-box;
+        border: 1px solid var(--line);
+        background: #08111d;
+        color: var(--text);
+        border-radius: 12px;
+        padding: 10px 12px;
+        font: inherit;
+      }
+      textarea { min-height: 94px; resize: vertical; }
+      .actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-top: 12px;
+      }
+      button {
+        border: 0;
+        border-radius: 999px;
+        padding: 10px 12px;
+        color: #08111d;
+        background: var(--accent);
+        font-weight: 800;
+        cursor: pointer;
+      }
+      button.secondary {
+        color: var(--text);
+        background: transparent;
+        border: 1px solid var(--line);
+      }
+      .output {
+        margin-top: 12px;
+        border-radius: 14px;
+        border: 1px solid var(--line);
+        background: rgba(7, 17, 31, 0.7);
+        padding: 10px;
+      }
+      pre {
+        margin: 0;
+        max-height: 250px;
+        overflow: auto;
+        white-space: pre-wrap;
+        word-break: break-word;
+        font-size: 12px;
+        line-height: 1.45;
+      }
+      .hint {
+        margin-top: 8px;
+        font-size: 11px;
+        color: var(--muted);
+      }
+      .pill {
+        display: inline-flex;
+        padding: 6px 10px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        color: var(--accent-strong);
+        font-size: 11px;
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <section class="card">
+        <div class="pill">Browser extension</div>
+        <h1>AI Prompt Firewall</h1>
+        <p>Scan the current page, pasted text, or an uploaded file locally. No setup or backend required.</p>
+
+        <label for="textInput">Pasted text</label>
+        <textarea id="textInput" placeholder="Paste text here to scan it instantly."></textarea>
+
+        <label for="file">Upload file</label>
+        <input id="file" type="file" />
+
+        <div class="actions">
+          <button id="scanPage">Scan current page</button>
+          <button id="scanText" class="secondary">Scan pasted text</button>
+          <button id="scanFile" class="secondary">Scan uploaded file</button>
+          <button id="clearOutput" class="secondary">Clear</button>
+        </div>
+
+        <div class="hint">Tip: page scans read the active tab text on click, so the page must allow script injection.</div>
+
+        <div class="output">
+          <pre id="output">Ready. Choose a source to scan.</pre>
+        </div>
+      </section>
+    </div>
+    <script src="scanner_fallback.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>

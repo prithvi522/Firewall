@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>AI Prompt Firewall — Privacy Policy</title>
+  <style>
+    body{font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;max-width:780px;margin:32px auto;color:#111}
+    header{border-bottom:1px solid #e6e6e6;padding-bottom:8px;margin-bottom:18px}
+    h1{font-size:1.6rem;margin:0}
+    h2{font-size:1.05rem;margin-top:20px}
+    p,li{line-height:1.5}
+    pre{background:#f6f8fa;padding:12px;border-radius:6px}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>AI Prompt Firewall — Privacy Policy</h1>
+    <p>Last updated: 2026-05-23</p>
+  </header>
+
+  <p>This privacy policy describes how the AI Prompt Firewall browser extension ("the Extension") collects, uses, and shares data when you use it.</p>
+
+  <h2>1. Data Collected</h2>
+  <ul>
+    <li><strong>Page text:</strong> When you explicitly click "Scan page text", the extension captures the visible page text (document body) and sends it to the configured backend API for analysis. The extension does not automatically or silently send page text.</li>
+    <li><strong>Uploaded files:</strong> If you upload a file via the extension popup, that file is sent to the configured backend for scanning.</li>
+    <li><strong>API URL:</strong> The extension stores the API URL in-memory in the popup only; it is not sent to any server by the extension itself.</li>
+  </ul>
+
+  <h2>2. Purpose</h2>
+  <p>The extension sends page text or uploaded files to the configured backend for safety analysis (threat detection, abusive language, sentiment, etc.).</p>
+
+  <h2>3. Third-party sharing</h2>
+  <p>The extension itself does not forward data to third parties. If you configure a remote backend, that backend operator may process or store data according to their own policies — review the backend's privacy policy before using a hosted service.</p>
+
+  <h2>4. Retention</h2>
+  <p>The extension does not retain scan data locally beyond displaying the result in the popup. Any retention is controlled by the backend service to which you send data.</p>
+
+  <h2>5. Security</h2>
+  <p>You are responsible for selecting a trusted backend. When using a remote API, use HTTPS and authentication.</p>
+
+  <h2>6. User controls</h2>
+  <ul>
+    <li>Only scan when you explicitly request it.</li>
+    <li>Do not configure the extension to point at untrusted backends.</li>
+  </ul>
+
+  <h2>7. Contact</h2>
+  <p>For questions about this privacy notice, contact the project maintainer at: <a href="mailto:maintainer@example.com">maintainer@example.com</a></p>
+
+  <p><em>This is a template privacy policy for demonstration. Review legal requirements (GDPR, CCPA) before distributing publicly and update contact information accordingly.</em></p>
+</body>
+</html>
